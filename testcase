@@ -1,0 +1,10 @@
+Given
+
+N = 8
+M = 8
+Edges = [[1,2,3], [1, 3, 1], [2, 4, 5], [2, 5, 1], [2, 6, 1], [3, 7, 2], [4, 8, 1], [1, 2, 3]]
+Paths = [[2, 8, 5], [1, 8, 7], [1, 5, 8], [1, 6, 10], [3, 7, 5], [1, 7, 6], [1, 7, 6]]
+Approach
+
+One of the possible subsets contains paths 1, 2, 4, 5, 6, 7. Its total cost is 3+5+8+10+5+6= 37.
+Thus, the answer array is [37].
