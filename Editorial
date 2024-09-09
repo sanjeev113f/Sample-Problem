@@ -1,0 +1,22 @@
+​
+This problem can be solved with minimum-cost circulation algorithm.
+Let the edges of our tree be oriented from root to leaves and have zero cost and capacity of  d(i) (we will call them down-edges).
+Then we add m extra edges oriented from leaves to root - our vertical paths(we will call them up-edges).
+They will have the capacity 1 of  and cost -c(i).
+Let -f be minimum-cost circulation in this network. Then f is the answer to the problem.
+To prove this algorithm, let's consider arbitrary circulation and show that the subset of paths which corresponds to all saturated up-edges is correct. Let c(i) to d(i) be saturated up-edge. The flow is the circulation, therefore, there is a flow from  c(i)  to d(i) . As our original graph forms a tree and down-edges are the only edges of this tree, every path from d(i) to c(i)  will contain down-edges which form a path between these vertices in the tree. So they must contain at least one unit of flow. Then we can subtract  from the flow in this path and edge  and subtract 1 from the capacities of the tree. Then we will repeat this operation until the cost of the flow is 0. So, each circulation determines correct subset of paths. On the other side, it's easy to prove that each subset determines circulation in the network.
+Only one problem remains - how to find the circulation very fast? One good approach is to add up-edges one
+by one and after each of them recalculates circulation.
+To deal with negative-cost edges we will calculate
+potentials P[i] in the vertices as in Dijkstra with potentials algorithm. We will consider new cost of each edge
+uv as Plu] — Pv] + cost(uv) and choose P{i] in a way that all new costs will be non-negative. We will use
+these new costs only when calculating distances in the network. Initially, P[i] = 0 for all i.
+Let we add new up-edge u — v with cost c in the network. Let's find the minimum-cost path from v to u in the remaining
+network with cost g using Dijkstra with potentials algorithm.
+Immediately after that recalculate potentials replacing P{é] with distance from u to i(not in the terminology of new costs!). To deal with unreachable vertices, we will successively run Dijkstra from a unreached vertex and thoroughly recalculate other
+potentials until each vertex was reached.
+If g + c < 0, push one unit of flow to all edges of the shortest path
+and to the new edge u — v.
+After that, all potentials will be correct which means no negative cycles in the
+network and proves this algorithm. Overall time complexity will be O(m(n + m) log(n + m))
+​
